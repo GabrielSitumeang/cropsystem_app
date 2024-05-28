@@ -17,7 +17,7 @@ class _RotasiTanamanPageState extends State<RotasiTanamanPage> {
   bool isSebelumSection = true;
 
   Future<Map<String, dynamic>> _fetchData(String namaTanaman) async {
-    final String baseUrl = 'hhttps://cropsystem.cloud/api/rotasitanaman';
+    final String baseUrl = 'http://192.168.25.158:8000/api/rotasitanaman';
     try {
       final response = await http.get(Uri.parse(
           '$baseUrl?nama_tanaman=$namaTanaman&jenis_informasi=Sebelum'));
@@ -53,7 +53,7 @@ class _RotasiTanamanPageState extends State<RotasiTanamanPage> {
               children: [
                 Material(
                   color: isSebelumSection
-                      ? Color(0xFF674AEF)
+                      ? Color.fromARGB(255, 19, 19, 19)
                       : Color(0xFF674AEF).withOpacity(0.6),
                   borderRadius: BorderRadius.circular(15),
                   child: InkWell(
@@ -79,7 +79,7 @@ class _RotasiTanamanPageState extends State<RotasiTanamanPage> {
                 Material(
                   color: isSebelumSection
                       ? Color(0xFF674AEF).withOpacity(0.6)
-                      : Color(0xFF674AEF),
+                      : Color.fromARGB(255, 14, 14, 15),
                   borderRadius: BorderRadius.circular(15),
                   child: InkWell(
                     onTap: () {

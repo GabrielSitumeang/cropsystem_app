@@ -198,7 +198,7 @@ class _TanamanListState extends State<TanamanList> {
 
   Future<List<dynamic>> _fetchTanaman() async {
     final String baseUrl =
-        'https://cropsystem.cloud/api/tanaman'; // Ubah URL sesuai dengan struktur rute API di Laravel
+        'http://192.168.25.158:8000/api/tanaman'; // Ubah URL sesuai dengan struktur rute API di Laravel
     try {
       final response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -294,7 +294,7 @@ class TanamanItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              'https://cropsystem.cloud/gambar_tanaman/$gambarTanaman',
+              'http://192.168.25.158:8000/gambar_tanaman/$gambarTanaman',
               width: 50,
               height: 50,
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pa3/pages/ajukan_informasi_page.dart';
 import 'package:pa3/pages/budidaya/irigasi_page.dart';
 import 'package:pa3/pages/budidaya/panen_pasca_page.dart';
 import 'package:pa3/pages/budidaya/pemantauan_page.dart';
@@ -129,11 +130,32 @@ class InformasiList extends StatelessWidget {
                   title: 'Panen dan Pasca Panen',
                   page: PanenPascaPage(namaTanaman: namaTanaman ?? ''),
                 ),
-                SizedBox(
-                  height: 5,
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0), // Menambah jarak ke atas
+            child: Row(
+              children: [
+                Spacer(), // Menggunakan Spacer untuk mendorong tombol ke kanan
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AjukanInformasiPage(),
+                      ),
+                    );
+                  },
+                  backgroundColor: Color.fromARGB(255, 60, 128, 62),
+                  foregroundColor: Colors.white,
+                  child: Text("Ajukan Informasi"),
                 ),
               ],
             ),
+          ),
+          SizedBox(
+            height: 15,
           ),
         ],
       ),

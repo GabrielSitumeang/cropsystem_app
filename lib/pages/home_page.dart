@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pa3/pages/budidaya/pilihtanaman_budidaya_page.dart';
 import 'package:pa3/pages/hama/pilihhamatanaman.dart';
-import 'package:pa3/pages/komunitas_page.dart';
+import 'package:pa3/pages/komunitas/komunitas_page.dart';
 import 'package:pa3/pages/pupuk/pilihtanaman_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
             decoration: BoxDecoration(
-              color: Colors.greenAccent,
+              color: Color.fromARGB(255, 40, 179, 112),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 1.1,
+                    childAspectRatio: 1,
                   ),
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -135,8 +135,8 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            height: 60,
-                            width: 60,
+                            height: 75,
+                            width: 75,
                             decoration: BoxDecoration(
                               color: menuColors[index],
                               shape: BoxShape.circle,

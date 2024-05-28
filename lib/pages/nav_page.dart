@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pa3/pages/budidaya_page.dart';
 import 'package:pa3/pages/home_page.dart';
-import 'package:pa3/pages/komunitas_page.dart';
+import 'package:pa3/pages/komunitas/komunitas_page.dart';
 import 'package:pa3/pages/profile_page.dart';
 
 class NavPage extends StatelessWidget {

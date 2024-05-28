@@ -12,7 +12,7 @@ class Pilihhamatanaman extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: backgroundWhite,
         title: Text(
-          'Hama dan Penyakit',
+          'Pilih Tanaman',
           style: primaryTextStyle.copyWith(
             fontSize: 20,
             fontWeight: semiBold,
@@ -41,7 +41,7 @@ class _TanamanListState extends State<TanamanList> {
 
   Future<List<dynamic>> _fetchTanaman() async {
     final String baseUrl =
-        'https://cropsystem.cloud/api/tanaman'; // Ubah URL sesuai dengan struktur rute API di Laravel
+        'http://192.168.25.158:8000/api/tanaman'; // Ubah URL sesuai dengan struktur rute API di Laravel
     try {
       final response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -57,35 +57,40 @@ class _TanamanListState extends State<TanamanList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(
+        top: 10,
+        left: 10,
+        right: 10,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Lihat informasi relevan tentang Hama',
-            style: subtitleTextStyle.copyWith(
-              fontSize: 18,
+          Container(
+            margin: EdgeInsets.only(top: 5, bottom: 20),
+            width: MediaQuery.of(context).size.width,
+            height: 55,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextFormField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Search here...",
+                hintStyle: TextStyle(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: 25,
+                ),
+              ),
             ),
           ),
           SizedBox(
             height: 2,
-          ),
-          Text(
-            'dan Penyakit',
-            style: subtitleTextStyle.copyWith(
-              fontSize: 18,
-            ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          Text(
-            'Pilih Tanaman',
-            style: subtitleTextStyle,
-          ),
-          SizedBox(
-            height: 20,
           ),
           FutureBuilder<List<dynamic>>(
             future: _futureTanaman,
@@ -124,8 +129,9 @@ class _TanamanListState extends State<TanamanList> {
 class TanamanItem extends StatelessWidget {
   final String? namaTanaman;
   final String? gambarTanaman;
+  final dynamic data;
 
-  const TanamanItem({Key? key, this.namaTanaman, this.gambarTanaman})
+  const TanamanItem({Key? key, this.namaTanaman, this.gambarTanaman, this.data})
       : super(key: key);
 
   @override
@@ -146,7 +152,7 @@ class TanamanItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              'https://cropsystem.cloud/gambar_tanaman/$gambarTanaman',
+              'http://192.168.25.158:8000/gambar_tanaman/$gambarTanaman',
               width: 50,
               height: 50,
             ),

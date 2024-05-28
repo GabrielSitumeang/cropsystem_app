@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pa3/pages/welcome_screen.dart';
+import 'package:pa3/providers/ajukan_informasi_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,17 +10,21 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: '',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AjukanInformasiProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Ajukan Informasi App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: WelcomeScreen(), // Set the home to your AjukanInformasiPage
       ),
-      home: WelcomeScreen(),
     );
   }
 }

@@ -47,17 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         backgroundColor: backgroundWhite,
-        appBar: AppBar(
-          backgroundColor: backgroundWhite,
-          title: Text(''),
-          centerTitle: true,
-        ),
         body: FutureBuilder(
           future: _initializeFirebase(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: 50, left: 10, right: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment:
@@ -75,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 2,
                     ),
                     Text(
-                      'Sign In to Continue',
+                      '',
                       style: subtitleTextStyle,
                     ),
                     SizedBox(
@@ -99,33 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 8,
                           ),
-                          // TextFormField(
-                          //   controller: _emailTextController,
-                          //   focusNode: _focusEmail,
-                          //   validator: (value) => Validator.validateEmail(
-                          //     email: value,
-                          //   ),
-                          //   decoration: InputDecoration(
-                          //     icon: Icon(
-                          //       Icons.email,
-                          //       color: primaryColor,
-                          //     ),
-                          //     hintText: "Email",
-                          //     errorBorder: UnderlineInputBorder(
-                          //       borderRadius: BorderRadius.circular(6.0),
-                          //       borderSide: BorderSide(
-                          //         color: Colors.red,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           Container(
                             height: 50,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 16),
                             decoration: BoxDecoration(
-                              color: blackColor,
+                              color: buttonColor,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
@@ -140,8 +113,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   Expanded(
                                     child: TextFormField(
-                                      style: primaryTextStyle,
+                                      style: buttonTextStyle,
                                       controller: _emailTextController,
+                                      focusNode: _focusEmail,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your email';
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration.collapsed(
                                         hintText: 'Your Email',
                                         hintStyle: subtitleTextStyle,
@@ -152,7 +132,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-
                           SizedBox(height: 22),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -168,34 +147,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 12,
                           ),
-                          // TextFormField(
-                          //   controller: _passwordTextController,
-                          //   focusNode: _focusPassword,
-                          //   obscureText: true,
-                          //   validator: (value) => Validator.validatePassword(
-                          //     password: value,
-                          //   ),
-                          //   decoration: InputDecoration(
-                          //     icon: Icon(
-                          //       Icons.password_outlined,
-                          //       color: primaryColor,
-                          //     ),
-                          //     hintText: "Password",
-                          //     errorBorder: UnderlineInputBorder(
-                          //       borderRadius: BorderRadius.circular(6.0),
-                          //       borderSide: BorderSide(
-                          //         color: Colors.red,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           Container(
                             height: 50,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 16),
                             decoration: BoxDecoration(
-                              color: blackColor,
+                              color: buttonColor,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
@@ -210,9 +166,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   Expanded(
                                     child: TextFormField(
-                                      style: primaryTextStyle,
+                                      style: buttonTextStyle,
                                       controller: _passwordTextController,
+                                      focusNode: _focusPassword,
                                       obscureText: true,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your password';
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration.collapsed(
                                         hintText: 'Your Password',
                                         hintStyle: subtitleTextStyle,
@@ -223,88 +186,93 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 24.0),
+                          SizedBox(height: 54.0),
                           _isProcessing
                               ? CircularProgressIndicator()
-                              : Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              : Column(
                                   children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          _focusEmail.unfocus();
-                                          _focusPassword.unfocus();
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              _focusEmail.unfocus();
+                                              _focusPassword.unfocus();
 
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            setState(() {
-                                              _isProcessing = true;
-                                            });
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                setState(() {
+                                                  _isProcessing = true;
+                                                });
 
-                                            User? user =
-                                                await FirebaseAuthHelper
-                                                    .signInUsingEmailPassword(
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
-                                            );
+                                                User? user =
+                                                    await FirebaseAuthHelper
+                                                        .signInUsingEmailPassword(
+                                                  email:
+                                                      _emailTextController.text,
+                                                  password:
+                                                      _passwordTextController
+                                                          .text,
+                                                );
 
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
+                                                setState(() {
+                                                  _isProcessing = false;
+                                                });
 
-                                            if (user != null) {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      NavPage(),
-                                                ),
-                                              );
-                                            }
-                                          }
-                                        },
-                                        child: Text(
-                                          'Sign In',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                            Colors.green,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 24.0),
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SignUpScreen(),
+                                                if (user != null) {
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavPage(),
+                                                    ),
+                                                  );
+                                                }
+                                              }
+                                            },
+                                            child: Text(
+                                              'Sign In',
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
-                                          );
-                                        },
-                                        child: Text(
-                                          'SignUp',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                            Colors.green,
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                Colors.green,
+                                              ),
+                                            ),
                                           ),
+                                        ),
+                                        SizedBox(width: 24.0),
+                                      ],
+                                    ),
+                                    SizedBox(height: 12.0),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        'Belum memiliki akun?',
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize:
+                                              16.0, // Anda bisa menyesuaikan ukuran font
+                                          // Tambahkan garis bawah jika diinginkan
                                         ),
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               );

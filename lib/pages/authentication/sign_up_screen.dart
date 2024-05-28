@@ -1,7 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pa3/helper/firebase_auth.dart';
+import 'package:pa3/pages/authentication/login_screen.dart';
 import 'package:pa3/pages/nav_page.dart';
 import 'package:pa3/theme.dart';
 
@@ -32,12 +32,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: backgroundWhite,
-          title: Text(' '),
-          centerTitle: true,
-        ),
-
         // body: Padding(
         //   padding: const EdgeInsets.all(24.0),
         //   child: Center(
@@ -161,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         // ),
 
         body: Container(
-          margin: EdgeInsets.only(top: 10),
+          margin: EdgeInsets.only(top: 50, left: 10, right: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment:
@@ -179,7 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 2,
               ),
               Text(
-                'Register and Enjoy using this app',
+                '',
                 style: subtitleTextStyle,
               ),
               SizedBox(
@@ -210,7 +204,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: blackColor,
+                        color: buttonColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -278,7 +272,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: blackColor,
+                        color: buttonColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -348,7 +342,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: blackColor,
+                        color: buttonColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -459,7 +453,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(height: 12.0),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Sudah memiliki akun? Login disini',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 16.0, // Anda bisa menyesuaikan ukuran font
+                          // Tambahkan garis bawah jika diinginkan
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )

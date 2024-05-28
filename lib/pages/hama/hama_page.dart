@@ -24,7 +24,7 @@ class _HamaPageState extends State<HamaPage> {
 
   Future<List<dynamic>> _fetchPupuk() async {
     final String baseUrl =
-        'https://cropsystem.cloud/api/hama?nama_tanaman=${widget.namaTanaman}';
+        'http://192.168.25.158:8000/api/hama?nama_tanaman=${widget.namaTanaman}';
     try {
       final response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -100,7 +100,7 @@ class _HamaPageState extends State<HamaPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.network(
-                                  'https://cropsystem.cloud/gambar_tanaman/${snapshot.data?[index]['gambar_tanaman']}',
+                                  'http://192.168.25.158:8000/gambar_tanaman/${snapshot.data?[index]['gambar_tanaman']}',
                                   width: 550,
                                   height: 150,
                                 ),
@@ -166,7 +166,7 @@ class DetailPupukPage extends StatelessWidget {
                   ),
                 ),
                 Image.network(
-                  'https://cropsystem.cloud/gambar_tanaman/${data['gambar_tanaman']}',
+                  'http://192.168.25.158:8000/gambar_tanaman/${data['gambar_tanaman']}',
                   width: 500,
                   height: 100,
                 ),
@@ -217,7 +217,7 @@ class FullDetailPupukPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              'https://cropsystem.cloud/gambar_tanaman/${data['gambar_tanaman']}',
+              'http://192.168.25.158:8000/gambar_tanaman/${data['gambar_tanaman']}',
               width: 500,
               height: 100,
             ),

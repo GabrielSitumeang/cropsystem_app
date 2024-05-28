@@ -24,7 +24,7 @@ class _SesudahSectionState extends State<SesudahSection> {
 
   Future<List<dynamic>> _fetchData(String namaTanaman) async {
     final String baseUrl =
-        'https://cropsystem.cloud/api/rotasitanaman'; // Update URL according to your API route
+        'http://192.168.25.158:8000/api/rotasitanaman'; // Update URL according to your API route
     try {
       final response = await http.get(Uri.parse(
           '$baseUrl?nama_tanaman=$namaTanaman&jenis_informasi=Sesudah'));
@@ -94,7 +94,7 @@ class _SesudahSectionState extends State<SesudahSection> {
                                   ),
                                   SizedBox(height: 10),
                                   Image.network(
-                                    'https://cropsystem.cloud/${item['gambar_tanaman']}',
+                                    'http://192.168.25.158:8000/${item['gambar_tanaman']}',
                                     width: 100,
                                     height: 100,
                                   ),

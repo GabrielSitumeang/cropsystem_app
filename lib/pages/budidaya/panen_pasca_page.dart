@@ -24,7 +24,7 @@ class _PanenPascaPageState extends State<PanenPascaPage> {
 
   Future<List<dynamic>> _fetchData(String endpoint) async {
     final String baseUrl =
-        'https://cropsystem.cloud/api$endpoint?nama_tanaman=${widget.namaTanaman}';
+        'http://192.168.25.158:8000/api$endpoint?nama_tanaman=${widget.namaTanaman}';
     try {
       final response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -72,7 +72,7 @@ class _PanenPascaPageState extends State<PanenPascaPage> {
                             children: [
                               Image.network(
                                 snapshot.data?[index]['gambar_tanaman'] != null
-                                    ? 'https://cropsystem.cloud/gambar_tanaman/${snapshot.data?[index]['gambar_tanaman']}'
+                                    ? 'http://192.168.25.158:8000/gambar_tanaman/${snapshot.data?[index]['gambar_tanaman']}'
                                     : 'https://via.placeholder.com/500x100.png?text=Placeholder+Image',
                                 width: 500,
                                 height: 100,
@@ -132,19 +132,45 @@ class _PanenPascaPageState extends State<PanenPascaPage> {
                       itemCount: snapshot.data?.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          elevation: 4,
-                          child: ListTile(
-                            title: Text(
-                                '${snapshot.data?[index]['keterangan'] ?? ''}'),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailPage(data: snapshot.data?[index]),
+                          elevation: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                snapshot.data?[index]['gambar_tanaman'] != null
+                                    ? 'http://192.168.25.158:8000/gambar_tanaman/${snapshot.data?[index]['gambar_tanaman']}'
+                                    : 'https://via.placeholder.com/500x100.png?text=Placeholder+Image',
+                                width: 500,
+                                height: 100,
+                              ),
+                              ListTile(
+                                title: Text(
+                                  '${snapshot.data?[index]['keterangan']}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              );
-                            },
+                              ),
+                              ListTile(
+                                title: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                            data: snapshot.data?[index]),
+                                      ),
+                                    );
+                                  },
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.blue, // Text color
+                                  ),
+                                  child: Text('Baca Selengkapnya'),
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       },
@@ -177,7 +203,7 @@ class DetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              'https://cropsystem.cloud/gambar_tanaman/${data['gambar_tanaman'] ?? ''}',
+              'http://192.168.25.158:8000/gambar_tanaman/${data['gambar_tanaman'] ?? ''}',
               width: 500,
               height: 100,
             ),
