@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa3/pages/budidaya/pilihtanaman_budidaya_page.dart';
+import 'package:pa3/pages/catatan/index_catatan_page.dart';
 import 'package:pa3/pages/hama/pilihhamatanaman.dart';
 import 'package:pa3/pages/komunitas/komunitas_page.dart';
 import 'package:pa3/pages/pupuk/pilihtanaman_page.dart';
@@ -122,7 +123,7 @@ class HomePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PilihtanamanPage()),
+                                builder: (context) => const IndexCatatan()),
                           );
                         } else if (menu[index] == "Komunitas") {
                           Navigator.push(
