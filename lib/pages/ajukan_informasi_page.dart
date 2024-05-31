@@ -21,9 +21,9 @@ class AjukanInformasiPage extends StatelessWidget {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 return ListView.builder(
-                  itemCount: provider.AjukanInformasiList.length,
+                  itemCount: provider.ajukanInformasiList.length,
                   itemBuilder: (context, index) {
-                    final informasi = provider.AjukanInformasiList[index];
+                    final informasi = provider.ajukanInformasiList[index];
                     return ListTile(
                       title: Text(informasi.judul),
                       subtitle: Text(informasi.isi),

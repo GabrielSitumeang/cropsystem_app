@@ -5,6 +5,7 @@ import 'package:pa3/helper/firebase_auth.dart';
 import 'package:pa3/pages/authentication/sign_up_screen.dart';
 import 'package:pa3/pages/nav_page.dart';
 import 'package:pa3/theme.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -201,20 +202,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                               _focusEmail.unfocus();
                                               _focusPassword.unfocus();
 
-                                              if (_formKey.currentState!
-                                                  .validate()) {
+                                              if (_formKey.currentState!.validate()) {
                                                 setState(() {
                                                   _isProcessing = true;
                                                 });
 
-                                                User? user =
-                                                    await FirebaseAuthHelper
-                                                        .signInUsingEmailPassword(
-                                                  email:
-                                                      _emailTextController.text,
-                                                  password:
-                                                      _passwordTextController
-                                                          .text,
+                                                User? user = await FirebaseAuthHelper.signInUsingEmailPassword(
+                                                  email: _emailTextController.text,
+                                                  password: _passwordTextController.text,
                                                 );
 
                                                 setState(() {
@@ -222,16 +217,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 });
 
                                                 if (user != null) {
-                                                  Navigator.of(context)
-                                                      .pushReplacement(
+                                                  // Login berhasil
+                                                    Fluttertoast.showToast(
+                                                    msg: "Login berhasil!",
+                                                    toastLength: Toast.LENGTH_SHORT,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                    timeInSecForIosWeb: 1,
+                                                    backgroundColor: Colors.green,
+                                                    textColor: Colors.white,
+                                                    fontSize: 16.0,
+                                                  );
+
+                                                  Navigator.of(context).pushReplacement(
                                                     MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          NavPage(),
+                                                      builder: (context) => NavPage(),
                                                     ),
+                                                  );
+                                                } else {
+                                                  // Login gagal
+                                                    Fluttertoast.showToast(
+                                                    msg: "Email atau Password yang Anda masukkan salah!",
+                                                    toastLength: Toast.LENGTH_SHORT,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                    timeInSecForIosWeb: 1,
+                                                    backgroundColor: Colors.red,
+                                                    textColor: Colors.white,
+                                                    fontSize: 16.0,
                                                   );
                                                 }
                                               }
                                             },
+
                                             child: Text(
                                               'Sign In',
                                               style: TextStyle(

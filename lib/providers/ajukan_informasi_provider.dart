@@ -18,19 +18,16 @@ class AjukanInformasiProvider with ChangeNotifier {
         () => http
             .get(Uri.parse('http://192.168.25.158:8000/api/ajukanInformasi'))
             .timeout(Duration(seconds: 5)),
-        retryIf: (e) =>
-            e is http.ClientException ||
-            e is TimeoutException ||
-            (e is http.Response && e.statusCode == 429),
+        retryIf: (e) => e is http.ClientException || e is TimeoutException,
       );
 
-      if (response is http.Response && response.statusCode == 200) {
+      if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         _ajukanInformasiList =
             data.map((item) => AjukanInformasi.fromJson(item)).toList();
         notifyListeners();
       } else {
-        throw Exception('Failed to load AjukanInformasi: ${response}');
+        throw Exception('Failed to load AjukanInformasi: ${response.statusCode}');
       }
     } catch (error) {
       print('Error fetching data: $error');
@@ -50,10 +47,7 @@ class AjukanInformasiProvider with ChangeNotifier {
               body: json.encode(ajukanInformasi.toJson()),
             )
             .timeout(Duration(seconds: 5)),
-        retryIf: (e) =>
-            e is http.ClientException ||
-            e is TimeoutException ||
-            e is http.Response && e.statusCode == 429,
+        retryIf: (e) => e is http.ClientException || e is TimeoutException,
       );
 
       if (response.statusCode == 201) {
@@ -61,7 +55,7 @@ class AjukanInformasiProvider with ChangeNotifier {
             .add(AjukanInformasi.fromJson(json.decode(response.body)));
         notifyListeners();
       } else {
-        throw Exception('Failed to add AjukanInformasi: ${response.body}');
+        throw Exception('Failed to add AjukanInformasi: ${response.statusCode}');
       }
     } catch (error) {
       print('Error adding data: $error');
@@ -82,10 +76,7 @@ class AjukanInformasiProvider with ChangeNotifier {
               body: json.encode(ajukanInformasi.toJson()),
             )
             .timeout(Duration(seconds: 5)),
-        retryIf: (e) =>
-            e is http.ClientException ||
-            e is TimeoutException ||
-            e is http.Response && e.statusCode == 429,
+        retryIf: (e) => e is http.ClientException || e is TimeoutException,
       );
 
       if (response.statusCode == 200) {
@@ -97,7 +88,7 @@ class AjukanInformasiProvider with ChangeNotifier {
           notifyListeners();
         }
       } else {
-        throw Exception('Failed to update AjukanInformasi: ${response.body}');
+        throw Exception('Failed to update AjukanInformasi: ${response.statusCode}');
       }
     } catch (error) {
       print('Error updating data: $error');
@@ -114,17 +105,14 @@ class AjukanInformasiProvider with ChangeNotifier {
             .delete(
                 Uri.parse('http://192.168.25.158:8000/api/ajukanInformasi/$id'))
             .timeout(Duration(seconds: 5)),
-        retryIf: (e) =>
-            e is http.ClientException ||
-            e is TimeoutException ||
-            e is http.Response && e.statusCode == 429,
+        retryIf: (e) => e is http.ClientException || e is TimeoutException,
       );
 
       if (response.statusCode == 204) {
         _ajukanInformasiList.removeWhere((item) => item.id == id);
         notifyListeners();
       } else {
-        throw Exception('Failed to delete AjukanInformasi: ${response.body}');
+        throw Exception('Failed to delete AjukanInformasi: ${response.statusCode}');
       }
     } catch (error) {
       print('Error deleting data: $error');
