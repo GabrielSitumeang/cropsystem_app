@@ -56,7 +56,7 @@ class _IndexCatatanState extends State<IndexCatatan> {
                     icon: Icon(Icons.delete),
                     onPressed: () {
                       setState(() {
-                        ApiService().deleteCatatan(catatan.id_catatan);
+                        ApiService().deleteCatatan(catatan.id);
                         _catatanList = ApiService().fetchCatatan();
                       });
                     },

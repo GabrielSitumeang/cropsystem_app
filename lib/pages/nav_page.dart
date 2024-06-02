@@ -5,9 +5,10 @@ import 'package:pa3/pages/budidaya_page.dart';
 import 'package:pa3/pages/home_page.dart';
 import 'package:pa3/pages/komunitas/komunitas_page.dart';
 import 'package:pa3/pages/profile_page.dart';
+import 'package:pa3/pages/catatan/index_catatan_page.dart';
 
-class NavPage extends StatelessWidget {
-  NavPage({super.key});
+class NavPageLoginScreen extends StatelessWidget {
+  NavPageLoginScreen({super.key});
   final _pageController = PageController();
 
   @override
@@ -28,7 +29,7 @@ class NavPage extends StatelessWidget {
         // ),
         body: PageView(
           controller: _pageController,
-          children: <Widget>[HomePage(), KomunitasPage(), ProfilePage()],
+          children: <Widget>[HomePage(), KomunitasPage(), ProfilePage(), const IndexCatatan()],
         ),
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.green,

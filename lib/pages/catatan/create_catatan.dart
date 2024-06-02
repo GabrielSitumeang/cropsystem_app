@@ -38,9 +38,9 @@ class _CreateCatatanState extends State<CreateCatatan> {
 
   void _saveCatatan() {
     if (_formKey.currentState!.validate()) {
-      final id = widget.catatan?.id_catatan ?? 0;
+      final id = widget.catatan?.id ?? 0;
       final catatan = Catatan(
-        id_catatan: id,
+        id: id,
         judul: _judulController.text,
         isi: _isiController.text,
         tanggal: _tanggalController.text,
@@ -61,6 +61,12 @@ class _CreateCatatanState extends State<CreateCatatan> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.catatan == null ? 'Tambah Catatan' : 'Edit Catatan'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: _saveCatatan,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -70,7 +76,10 @@ class _CreateCatatanState extends State<CreateCatatan> {
             children: [
               TextFormField(
                 controller: _judulController,
-                decoration: InputDecoration(labelText: 'Judul'),
+                decoration: InputDecoration(
+                  labelText: 'Judul',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Judul tidak boleh kosong';
@@ -78,30 +87,20 @@ class _CreateCatatanState extends State<CreateCatatan> {
                   return null;
                 },
               ),
+              SizedBox(height: 16),
               TextFormField(
                 controller: _isiController,
-                decoration: InputDecoration(labelText: 'Isi'),
+                decoration: InputDecoration(
+                  labelText: 'Isi',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 10,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Isi tidak boleh kosong';
                   }
                   return null;
                 },
-              ),
-              TextFormField(
-                controller: _tanggalController,
-                decoration: InputDecoration(labelText: 'Tanggal'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Tanggal tidak boleh kosong';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _saveCatatan,
-                child: Text(widget.catatan == null ? 'Tambah' : 'Update'),
               ),
             ],
           ),

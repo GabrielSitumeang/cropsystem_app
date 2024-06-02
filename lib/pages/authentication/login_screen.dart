@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => NavPage(),
+          builder: (context) => NavPageLoginScreen(),
         ),
       );
     }
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment:
-                      CrossAxisAlignment.start, // Align text to the left
+                      CrossAxisAlignment.start, 
                   children: [
                     Text(
                       'Login',
@@ -230,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                                   Navigator.of(context).pushReplacement(
                                                     MaterialPageRoute(
-                                                      builder: (context) => NavPage(),
+                                                      builder: (context) => NavPageLoginScreen(),
                                                     ),
                                                   );
                                                 } else {

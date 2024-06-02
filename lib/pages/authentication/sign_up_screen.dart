@@ -206,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               onPressed: () {
                                                 Navigator.of(context).pushAndRemoveUntil(
                                                   MaterialPageRoute(
-                                                    builder: (context) => NavPage(),
+                                                    builder: (context) => NavPageLoginScreen(),
                                                   ),
                                                   ModalRoute.withName('/'),
                                                 );
